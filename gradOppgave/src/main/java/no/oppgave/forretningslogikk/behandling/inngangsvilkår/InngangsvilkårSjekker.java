@@ -6,20 +6,20 @@ import java.time.LocalDate;
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
 import no.oppgave.forretningslogikk.felles.VilkårStatus;
 import no.oppgave.klienter.MedlemskapService;
-import no.oppgave.klienter.OpptjeningService;
+import no.oppgave.klienter.InntektdataService;
 import no.oppgave.klienter.PersondataService;
 
 public class InngangsvilkårSjekker {
 
     private MedlemskapService medlemskapService;
-    private OpptjeningService opptjeningService;
+    private InntektdataService inntektdataService;
     private PersondataService persondataService;
 
     public InngangsvilkårSjekker(MedlemskapService medlemskapService,
-                                 OpptjeningService opptjeningService,
+                                 InntektdataService inntektdataService,
                                  PersondataService persondataService) {
         this.medlemskapService = medlemskapService;
-        this.opptjeningService = opptjeningService;
+        this.inntektdataService = inntektdataService;
         this.persondataService = persondataService;
     }
 
@@ -36,7 +36,7 @@ public class InngangsvilkårSjekker {
             return VilkårStatus.AVSLÅTT;
         }
 
-        var opptjeningResultat = opptjeningService.harOpptjening(fødselsnummer, startidspunkt);
+        var opptjeningResultat = inntektdataService.harOpptjening(fødselsnummer, startidspunkt);
         if (opptjeningResultat == null || opptjeningResultat.getVilkårStatus().equals(VilkårStatus.AVSLÅTT)) {
             return VilkårStatus.AVSLÅTT;
         }
