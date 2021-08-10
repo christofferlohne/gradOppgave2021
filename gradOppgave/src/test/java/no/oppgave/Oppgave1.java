@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import no.oppgave.forretningslogikk.behandling.inngangsvilkår.InngangsvilkårSjekker;
-import no.oppgave.forretningslogikk.behandling.inngangsvilkår.VilkårStatus;
+import no.oppgave.forretningslogikk.felles.VilkårStatus;
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
 import no.oppgave.klienter.MedlemskapService;
 import no.oppgave.klienter.OpptjeningService;

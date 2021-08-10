@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
+import no.oppgave.forretningslogikk.felles.VilkårStatus;
 import no.oppgave.klienter.MedlemskapService;
 import no.oppgave.klienter.OpptjeningService;
 import no.oppgave.klienter.PersondataService;

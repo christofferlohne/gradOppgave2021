@@ -1,6 +1,6 @@
 package no.oppgave.klienter;
 
-import no.oppgave.forretningslogikk.behandling.inngangsvilkår.VilkårStatus;
+import no.oppgave.forretningslogikk.felles.VilkårStatus;
 
 public class MedlemskapResultat {
 
