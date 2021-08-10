@@ -1,28 +1,36 @@
 package no.oppgave;
 
-import no.oppgave.eksterne.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import no.oppgave.forretningslogikk.behandling.inngangsvilkår.InngangsvilkårSjekker;
+import no.oppgave.forretningslogikk.felles.VilkårStatus;
+import no.oppgave.forretningslogikk.felles.Fødselsnummer;
+import no.oppgave.klienter.MedlemskapResultat;
+import no.oppgave.klienter.MedlemskapService;
+import no.oppgave.klienter.OpptjeningResultat;
+import no.oppgave.klienter.OpptjeningService;
+import no.oppgave.klienter.PersondataService;
+
 class Oppgave3Fasit {
 
-    public static final String PERSON_ID = "12312312312";
+    public static final Fødselsnummer PERSON_ID = new Fødselsnummer("12312312312");
     public static final LocalDate STARTIDSPUNKT = LocalDate.now();
-    private OppfyltInngangsvilkårService underTest;
+    private InngangsvilkårSjekker underTest;
     private MedlemskapService medlemskapService = mock(MedlemskapService.class);
     private OpptjeningService opptjeningService = mock(OpptjeningService.class);
     private PersondataService persondataService = mock(PersondataService.class);
 
     @BeforeEach
     void setUp() {
-        underTest = new OppfyltInngangsvilkårService(medlemskapService, opptjeningService, persondataService);
+        underTest = new InngangsvilkårSjekker(medlemskapService, opptjeningService, persondataService);
 
     }
 
