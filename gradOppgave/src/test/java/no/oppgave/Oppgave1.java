@@ -12,19 +12,19 @@ import no.oppgave.forretningslogikk.behandling.inngangsvilkår.InngangsvilkårSj
 import no.oppgave.forretningslogikk.felles.VilkårStatus;
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
 import no.oppgave.klienter.MedlemskapService;
-import no.oppgave.klienter.OpptjeningService;
+import no.oppgave.klienter.InntektdataService;
 import no.oppgave.klienter.PersondataService;
 
 class Oppgave1 {
 
     private InngangsvilkårSjekker underTest;
     private MedlemskapService medlemskapService;
-    private OpptjeningService opptjeningService;
+    private InntektdataService inntektdataService;
     private PersondataService persondataService;
 
     @BeforeEach
     void setUp() {
-        underTest = new InngangsvilkårSjekker(medlemskapService, opptjeningService, persondataService);
+        underTest = new InngangsvilkårSjekker(medlemskapService, inntektdataService, persondataService);
 
     }
 
