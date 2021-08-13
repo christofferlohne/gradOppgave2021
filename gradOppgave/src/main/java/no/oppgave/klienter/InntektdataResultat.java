@@ -1,28 +1,14 @@
 package no.oppgave.klienter;
 
-import no.oppgave.forretningslogikk.felles.VilkårStatus;
-
 public class InntektdataResultat {
-    private double årsinntekt;
-    private VilkårStatus vilkårStatus;
+    private final double årsinntekt;
 
-    public InntektdataResultat() {}
+    public InntektdataResultat(double årsinntekt) {
+        this.årsinntekt = årsinntekt;
+    }
 
     public double getÅrsinntekt() {
         return årsinntekt;
     }
 
-    public VilkårStatus getVilkårStatus() {
-        return vilkårStatus;
-    }
-
-    public InntektdataResultat medÅrsinntekt(Double årsinntekt) {
-        this.årsinntekt = årsinntekt;
-        return this;
-    }
-
-    public InntektdataResultat medVilkårStatus(VilkårStatus vilkårStatus) {
-        this.vilkårStatus = vilkårStatus;
-        return this;
-    }
 }
