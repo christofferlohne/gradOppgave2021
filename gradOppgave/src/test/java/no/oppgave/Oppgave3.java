@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 import no.oppgave.forretningslogikk.behandling.inngangsvilkår.InngangsvilkårSjekker;
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
 import no.oppgave.forretningslogikk.felles.VilkårStatus;
-import no.oppgave.klienter.InntektdataResultat;
 import no.oppgave.klienter.InntektdataService;
 import no.oppgave.klienter.MedlemskapResultat;
 import no.oppgave.klienter.MedlemskapService;
+import no.oppgave.klienter.OpptjeningResultat;
 import no.oppgave.klienter.PersondataService;
 
 class Oppgave3 {
@@ -40,7 +40,7 @@ class Oppgave3 {
         when(medlemskapService.harMedlemskap(fødselsnummer, LocalDate.now()))
                 .thenReturn(new MedlemskapResultat(VilkårStatus.INNVILGET));
         when(inntektdataService.harOpptjening(fødselsnummer, LocalDate.now()))
-                .thenReturn(new InntektdataResultat().medVilkårStatus(VilkårStatus.INNVILGET));
+                .thenReturn(new OpptjeningResultat(VilkårStatus.INNVILGET));
 
         var vilkårStatus = underTest.oppfyltVilkår(fødselsnummer, LocalDate.now());
         assertEquals(VilkårStatus.INNVILGET, vilkårStatus);

@@ -3,7 +3,7 @@ package no.oppgave.forretningslogikk.behandling;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import no.oppgave.forretningslogikk.behandling.beregning.BeregningSjekk;
+import no.oppgave.forretningslogikk.behandling.beregning.Beregning;
 import no.oppgave.forretningslogikk.behandling.inngangsvilkår.InngangsvilkårSjekker;
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
 import no.oppgave.forretningslogikk.felles.VilkårStatus;
@@ -12,9 +12,9 @@ import no.oppgave.forretningslogikk.felles.Årsak;
 public class Behandling {
 
     private InngangsvilkårSjekker inngangsvilkårSjekker;
-    private BeregningSjekk beregningSjekke;
+    private Beregning beregningSjekke;
 
-    public Behandling(InngangsvilkårSjekker inngangsvilkårSjekker, BeregningSjekk beregningSjekke) {
+    public Behandling(InngangsvilkårSjekker inngangsvilkårSjekker, Beregning beregningSjekke) {
         this.inngangsvilkårSjekker = inngangsvilkårSjekker;
         this.beregningSjekke = beregningSjekke;
     }

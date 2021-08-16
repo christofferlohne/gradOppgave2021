@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import no.oppgave.forretningslogikk.behandling.Behandling;
-import no.oppgave.forretningslogikk.behandling.beregning.BeregningSjekk;
+import no.oppgave.forretningslogikk.behandling.beregning.Beregning;
 import no.oppgave.forretningslogikk.behandling.inngangsvilkår.InngangsvilkårSjekker;
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
 import no.oppgave.forretningslogikk.felles.VilkårStatus;
@@ -30,13 +30,13 @@ class Oppgave5 {
     private final PersondataService persondataService = mock(PersondataService.class);
     private final InngangsvilkårSjekker inngangsvilkårSjekker =
             new InngangsvilkårSjekker(medlemskapService, inntektdataService, persondataService);
-    private final BeregningSjekk beregningSjekk =
-            new BeregningSjekk(inntektdataService);
+    private final Beregning beregning =
+            new Beregning(inntektdataService);
 
 
     @BeforeEach
     void setUp() {
-        underTest = new Behandling(inngangsvilkårSjekker, beregningSjekk);
+        underTest = new Behandling(inngangsvilkårSjekker, beregning);
 
     }
 

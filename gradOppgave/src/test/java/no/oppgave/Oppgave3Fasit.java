@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 import no.oppgave.forretningslogikk.behandling.inngangsvilkår.InngangsvilkårSjekker;
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
 import no.oppgave.forretningslogikk.felles.VilkårStatus;
-import no.oppgave.klienter.InntektdataResultat;
 import no.oppgave.klienter.InntektdataService;
 import no.oppgave.klienter.MedlemskapResultat;
 import no.oppgave.klienter.MedlemskapService;
+import no.oppgave.klienter.OpptjeningResultat;
 import no.oppgave.klienter.PersondataService;
 
 class Oppgave3Fasit {
@@ -41,7 +41,7 @@ class Oppgave3Fasit {
         when(medlemskapService.harMedlemskap(PERSON_ID, STARTIDSPUNKT))
                 .thenReturn(new MedlemskapResultat(VilkårStatus.INNVILGET));
         when(inntektdataService.harOpptjening(PERSON_ID, STARTIDSPUNKT))
-                .thenReturn(new InntektdataResultat().medVilkårStatus(VilkårStatus.INNVILGET));
+                .thenReturn(new OpptjeningResultat(VilkårStatus.INNVILGET));
         var vilkårStatus = underTest.oppfyltVilkår(PERSON_ID, STARTIDSPUNKT);
         assertEquals(VilkårStatus.INNVILGET, vilkårStatus);
     }
@@ -53,7 +53,7 @@ class Oppgave3Fasit {
         when(medlemskapService.harMedlemskap(PERSON_ID, STARTIDSPUNKT))
                 .thenReturn(new MedlemskapResultat(VilkårStatus.INNVILGET));
         when(inntektdataService.harOpptjening(PERSON_ID, STARTIDSPUNKT))
-                .thenReturn(new InntektdataResultat().medVilkårStatus(VilkårStatus.AVSLÅTT));
+                .thenReturn(new OpptjeningResultat(VilkårStatus.AVSLÅTT));
 
         var vilkårStatus = underTest.oppfyltVilkår(PERSON_ID, STARTIDSPUNKT);
         assertEquals(VilkårStatus.AVSLÅTT, vilkårStatus);
