@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import no.oppgave.forretningslogikk.behandling.inngangsvilkår.InngangsvilkårSjekker;
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
 import no.oppgave.forretningslogikk.felles.VilkårStatus;
+import no.oppgave.forretningslogikk.felles.Årsak;
 import no.oppgave.klienter.InntektdataService;
 import no.oppgave.klienter.MedlemskapResultat;
 import no.oppgave.klienter.MedlemskapService;
@@ -31,7 +32,6 @@ class Oppgave3Fasit {
     @BeforeEach
     void setUp() {
         underTest = new InngangsvilkårSjekker(medlemskapService, inntektdataService, persondataService);
-
     }
 
     @Test
@@ -42,8 +42,8 @@ class Oppgave3Fasit {
                 .thenReturn(new MedlemskapResultat(VilkårStatus.INNVILGET));
         when(inntektdataService.harOpptjening(PERSON_ID, STARTIDSPUNKT))
                 .thenReturn(new OpptjeningResultat(VilkårStatus.INNVILGET));
-        var vilkårStatus = underTest.oppfyltVilkår(PERSON_ID, STARTIDSPUNKT);
-        assertEquals(VilkårStatus.INNVILGET, vilkårStatus);
+        var inngangsvilkårResultat = underTest.oppfyltVilkår(PERSON_ID, STARTIDSPUNKT);
+        assertEquals(VilkårStatus.INNVILGET, inngangsvilkårResultat.getVilkårStatus());
     }
 
     @Test
@@ -55,16 +55,18 @@ class Oppgave3Fasit {
         when(inntektdataService.harOpptjening(PERSON_ID, STARTIDSPUNKT))
                 .thenReturn(new OpptjeningResultat(VilkårStatus.AVSLÅTT));
 
-        var vilkårStatus = underTest.oppfyltVilkår(PERSON_ID, STARTIDSPUNKT);
-        assertEquals(VilkårStatus.AVSLÅTT, vilkårStatus);
+        var inngangsvilkårResultat = underTest.oppfyltVilkår(PERSON_ID, STARTIDSPUNKT);
+        assertEquals(VilkårStatus.AVSLÅTT, inngangsvilkårResultat.getVilkårStatus());
+        assertEquals(Årsak.OPPTJENING, inngangsvilkårResultat.getÅrsak());
     }
 
     @Test
     public void burdeFåAvslagNårPersonIkkeFinnes() throws IOException {
         when(persondataService.personFinnes(PERSON_ID))
-                .thenReturn(true);
-        var vilkårStatus = underTest.oppfyltVilkår(PERSON_ID, STARTIDSPUNKT);
-        assertEquals(VilkårStatus.AVSLÅTT, vilkårStatus);
+                .thenReturn(false);
+        var inngangsvilkårResultat = underTest.oppfyltVilkår(PERSON_ID, STARTIDSPUNKT);
+        assertEquals(VilkårStatus.AVSLÅTT, inngangsvilkårResultat.getVilkårStatus());
+        assertEquals(Årsak.PERSONDATA, inngangsvilkårResultat.getÅrsak());
     }
 
 }

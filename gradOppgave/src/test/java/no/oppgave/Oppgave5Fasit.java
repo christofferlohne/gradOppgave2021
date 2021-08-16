@@ -41,7 +41,6 @@ class Oppgave5Fasit {
     @BeforeEach
     void setUp() {
         underTest = new Behandling(inngangsvilkårSjekker, beregning);
-
     }
 
     @Test

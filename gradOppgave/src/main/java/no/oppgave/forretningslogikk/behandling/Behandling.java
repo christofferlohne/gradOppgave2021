@@ -24,8 +24,8 @@ public class Behandling {
 
         var inngangsvilkårResultat = inngangsvilkårSjekker.oppfyltVilkår(fødselsnummer, startidspunkt);
 
-        if (inngangsvilkårResultat == null || inngangsvilkårResultat.equals(VilkårStatus.AVSLÅTT)) {
-            return new BehandlingResultat(inngangsvilkårResultat, 0.0).medÅrsak(Årsak.INNGANGSVILKÅR);
+        if (inngangsvilkårResultat == null || inngangsvilkårResultat.getVilkårStatus().equals(VilkårStatus.AVSLÅTT)) {
+            return new BehandlingResultat(VilkårStatus.AVSLÅTT, 0.0).medÅrsak(Årsak.INNGANGSVILKÅR);
         }
 
         var utbetaling = beregningSjekke.resultat(fødselsnummer, startidspunkt);

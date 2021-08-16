@@ -30,19 +30,22 @@ class Oppgave2 {
     }
 
     /*
-    Oppgaven 2: Få testen til å gå grønt!!!
+    Oppgaven 2: Få testen til å gå grønt (ikke lengre en feil i foretningslogikken.)
 
     For at vi skal få innvilget viklår så må følgende gjelde:
         1) Personen må finnes
         2) MedlemskapResultat må være gyldig.
         3) Opptjeningsvilkåret må være oppfylt.
 
-    Hint: Mockito.when()
+    Hint:
+        - Mockito.when() for få stube ut input (på funksjonskall)
+        - Mockito.thenReturn() for å stubbe ut output.
      */
+
     @Test
     public void burdeFåInnvilgetVilkår() throws IOException {
-        var vilkårStatus = underTest.oppfyltVilkår(new Fødselsnummer("12312312312"), LocalDate.now());
-        assertEquals(VilkårStatus.INNVILGET, vilkårStatus);
+        var inngangsvilkårResultat = underTest.oppfyltVilkår(new Fødselsnummer("12312312312"), LocalDate.now());
+        assertEquals(VilkårStatus.INNVILGET, inngangsvilkårResultat.getVilkårStatus());
     }
 
 }

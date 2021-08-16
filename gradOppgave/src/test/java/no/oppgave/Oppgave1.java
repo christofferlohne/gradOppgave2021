@@ -28,10 +28,16 @@ class Oppgave1 {
 
     }
 
+    /*
+    Oppgave 1:  Få testen til å kompiler (ikke få en java.lang.NullPointerException feil, at testen går gult er ok)
+    Bruk Mockito mock() for å instansieres klassene/servicene som "underTest" er avhengig av.
+    Kan se på https://site.mockito.org/ for mer info
+     */
+
     @Test
     public void burdeFåInnvilgetVilkår() throws IOException {
-        var vilkårStatus = underTest.oppfyltVilkår(new Fødselsnummer("12312312312"), LocalDate.now());
-        assertEquals(VilkårStatus.INNVILGET, vilkårStatus);
+        var inngangsvilkårResultat = underTest.oppfyltVilkår(new Fødselsnummer("12312312312"), LocalDate.now());
+        assertEquals(VilkårStatus.INNVILGET, inngangsvilkårResultat);
     }
 
 }

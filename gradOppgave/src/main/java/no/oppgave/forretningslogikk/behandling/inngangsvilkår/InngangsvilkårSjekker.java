@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import no.oppgave.forretningslogikk.felles.Fødselsnummer;
 import no.oppgave.forretningslogikk.felles.VilkårStatus;
+import no.oppgave.forretningslogikk.felles.Årsak;
 import no.oppgave.klienter.MedlemskapService;
 import no.oppgave.klienter.InntektdataService;
 import no.oppgave.klienter.PersondataService;
@@ -23,24 +24,24 @@ public class InngangsvilkårSjekker {
         this.persondataService = persondataService;
     }
 
-    public VilkårStatus oppfyltVilkår(Fødselsnummer fødselsnummer, LocalDate startidspunkt)
+    public InngangsvilkårResultat oppfyltVilkår(Fødselsnummer fødselsnummer, LocalDate startidspunkt)
             throws IOException {
 
         var personFinnes = persondataService.personFinnes(fødselsnummer);
         if (!personFinnes) {
-            return VilkårStatus.AVSLÅTT;
+            return new InngangsvilkårResultat(VilkårStatus.AVSLÅTT, Årsak.PERSONDATA);
         }
 
         var medlemskapResultat = medlemskapService.harMedlemskap(fødselsnummer, startidspunkt);
         if (medlemskapResultat == null || medlemskapResultat.getVilkårStatus().equals(VilkårStatus.AVSLÅTT)) {
-            return VilkårStatus.AVSLÅTT;
+            return new InngangsvilkårResultat(VilkårStatus.AVSLÅTT, Årsak.MEDLEMSKAP);
         }
 
         var opptjeningResultat = inntektdataService.harOpptjening(fødselsnummer, startidspunkt);
         if (opptjeningResultat == null || opptjeningResultat.getVilkårStatus().equals(VilkårStatus.AVSLÅTT)) {
-            return VilkårStatus.AVSLÅTT;
+            return new InngangsvilkårResultat(VilkårStatus.AVSLÅTT, Årsak.OPPTJENING);
         }
 
-        return VilkårStatus.INNVILGET;
+        return new InngangsvilkårResultat(VilkårStatus.INNVILGET, null);
     }
 }

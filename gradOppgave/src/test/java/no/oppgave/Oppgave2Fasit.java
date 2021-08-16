@@ -42,8 +42,8 @@ class Oppgave2Fasit {
         when(inntektdataService.harOpptjening(fødselsnummer, LocalDate.now()))
                 .thenReturn(new OpptjeningResultat(VilkårStatus.INNVILGET));
 
-        var vilkårStatus = underTest.oppfyltVilkår(fødselsnummer, LocalDate.now());
-        assertEquals(VilkårStatus.INNVILGET, vilkårStatus);
+        var inngangsvilkårResultat = underTest.oppfyltVilkår(fødselsnummer, LocalDate.now());
+        assertEquals(VilkårStatus.INNVILGET, inngangsvilkårResultat.getVilkårStatus());
     }
 
 }
