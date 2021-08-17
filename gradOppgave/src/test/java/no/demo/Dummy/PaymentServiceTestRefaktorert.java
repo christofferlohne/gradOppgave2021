@@ -30,7 +30,7 @@ class PaymentServiceTestRefaktorert {
 
 
     @Test
-    void create_payment_request() {
+    void verify_correct_payment_request_returned() {
         var sale = new Sale(BOB, List.of(IPHONE, IPHONE_LADER));
 
         var actual = paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);

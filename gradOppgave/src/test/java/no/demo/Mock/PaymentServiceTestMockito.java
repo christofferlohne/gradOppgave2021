@@ -69,6 +69,8 @@ class PaymentServiceTestMockito {
         assertEquals(BOB_CREDIT_CARD.creditcardNumber(), actual.getCreditcardNumber());
         assertEquals(50, actual.getFee());
 
+        /** Mock **/
+        //emailSender.verify();
         verify(emailSender, never()).send(actual);
     }
 }
