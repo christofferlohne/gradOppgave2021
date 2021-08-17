@@ -1,7 +1,8 @@
-package no.demo.Mock;
+package no.demo.Spy;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.List;
@@ -13,12 +14,15 @@ import no.demo.CreditCard;
 import no.demo.Customer;
 import no.demo.Item;
 import no.demo.Logger;
+import no.demo.Mock.PaymentEmailSender;
+import no.demo.Mock.PaymentRequest;
+import no.demo.Mock.PaymentService;
 import no.demo.Sale;
 import no.demo.Stub.OperatorRate;
 
 class PaymentServiceTestMockito {
 
-    //private PaymentEmailSenderMock emailSender;
+    //private PaymentEmailSenderSpy emailSenderSpy;
     private PaymentEmailSender emailSender;
     private OperatorRate operatorRate;
     private PaymentService paymentService;
@@ -35,7 +39,7 @@ class PaymentServiceTestMockito {
         operatorRate = mock(OperatorRate.class);
         given(operatorRate.feeRate(BOB_CREDIT_CARD.creditcardNumber())).willReturn(10);
 
-        /** Mock */
+        /** Mock/Spy */
         // emailSender = new PaymentEmailSenderMock();
         emailSender = mock(PaymentEmailSender.class);
 
@@ -43,18 +47,14 @@ class PaymentServiceTestMockito {
     }
 
     @Test
-    void send_email_to_the_administration_if_sale_is_over_1000() {
+    void not_send_email_for_sales_under_eller_lik_1000() {
         Item lader = new Item("Iphone lader", 200);
-        Sale sale = new Sale(BOB, List.of(IPHONE, lader));
+        Sale sale = new Sale(BOB, List.of(lader));
 
-        paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);
+        PaymentRequest paymentRequest1 = paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);
 
-        var paymentRequest = new PaymentRequest(1200, BOB_CREDIT_CARD.creditcardNumber(), 120);
-
-        /** Mock */
-        //emailSender.expect(paymentRequest);
-        //emailSender.verify();
-        verify(emailSender).send(paymentRequest);
-
+        PaymentRequest paymentRequest = new PaymentRequest(200, BOB_CREDIT_CARD.creditcardNumber(), 20);
+        verify(emailSender, times(0)).send(paymentRequest);
+//        assertEquals(0, emailSenderSpy.timesCalled());
     }
 }
