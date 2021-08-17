@@ -22,7 +22,7 @@ public class PaymentService {
         logger.append("Creating payment for sale " + sale.toString());
 
         var feeRate = operatorRate.feeRate(creditCard.creditcardNumber());
-        var fee = (feeRate * sale.total()) / 100;
+        var fee = (feeRate * sale.total()) / 100; // 10% fee
 
         var paymentRequest = new PaymentRequest(sale.total(), creditCard.creditcardNumber(), fee);
 

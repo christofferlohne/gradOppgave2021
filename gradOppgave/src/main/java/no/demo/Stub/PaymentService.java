@@ -20,7 +20,7 @@ public class PaymentService {
         logger.append("Creating payment for sale " + sale.toString());
 
         int feeRate = operatorRate.feeRate(creditCard.creditcardNumber());
-        int fee = (feeRate * sale.total()) / 100;
+        int fee = (feeRate * sale.total()) / 100; // 10% fee
 
         return new PaymentRequest(sale.total(), creditCard.creditcardNumber(), fee);
     }

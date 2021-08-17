@@ -36,11 +36,13 @@ class PaymentServiceTestMockito {
     }
 
     @Test
-    void create_payment_request() {
+    void create_payment_request_verify_correct_fee() {
         Sale sale = new Sale(BOB, List.of(IPHONE));
 
         PaymentRequest actual = paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);
 
-        assertEquals(new PaymentRequest(1000, "1", 100), actual);
+        assertEquals(1000, actual.getSaleTotal());
+        assertEquals(BOB_CREDIT_CARD.creditcardNumber(), actual.getCreditcardNumber());
+        assertEquals(100, actual.getFee());
     }
 }

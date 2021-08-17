@@ -24,6 +24,7 @@ class PaymentServiceTest {
     private LoggerDummy loggerDummy;
     public static final Customer BOB = new Customer("Bob");
     public static final Item IPHONE = new Item("iPhone X", 1000);
+    public static final Item IPHONE_LADER = new Item("iPhone lader", 500);
     public static final CreditCard BOB_CREDIT_CARD = new CreditCard(BOB, "1");
 
     @BeforeEach
@@ -35,9 +36,17 @@ class PaymentServiceTest {
     }
 
     @Test
+    void send_email_to_the_administration_if_sale_is_over_1000() {
+        var sale = new Sale(BOB, List.of(IPHONE, IPHONE_LADER));
+
+        paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);
+
+        assertEquals(1, emailSenderSpy.timesCalled());
+    }
+
+    @Test
     void not_send_email_for_sales_under_eller_lik_1000() {
-        Item lader = new Item("Iphone lader", 200);
-        Sale sale = new Sale(BOB, List.of(lader));
+        var sale = new Sale(BOB, List.of(IPHONE_LADER));
 
         paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);
 

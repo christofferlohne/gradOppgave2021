@@ -1,5 +1,7 @@
 package no.demo.Mock;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +23,7 @@ class PaymentServiceTest {
     private LoggerDummy loggerDummy;
     public static final Customer BOB = new Customer("Bob");
     public static final Item IPHONE = new Item("iPhone X", 1000);
+    public static final Item IPHONE_LADER = new Item("iPhone lader", 500);
     public static final CreditCard BOB_CREDIT_CARD = new CreditCard(BOB, "1");
 
     @BeforeEach
@@ -33,13 +36,25 @@ class PaymentServiceTest {
 
     @Test
     void send_email_to_the_administration_if_sale_is_over_1000() {
-        Item lader = new Item("Iphone lader", 200);
-        Sale sale = new Sale(BOB, List.of(IPHONE, lader));
+        var sale = new Sale(BOB, List.of(IPHONE, IPHONE_LADER));
 
         paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);
 
-        var paymentRequest = new PaymentRequest(1200, BOB_CREDIT_CARD.creditcardNumber(), 100);
+        var paymentRequest = new PaymentRequest(1500, BOB_CREDIT_CARD.creditcardNumber(), 150);
         emailSender.expect(paymentRequest);
+        emailSender.verify();
+    }
+
+    @Test
+    void do_not_send_email_to_the_administration_if_sale_is_under_1000() {
+        var sale = new Sale(BOB, List.of(IPHONE_LADER));
+
+        var actual = paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);
+
+        assertEquals(500, actual.getSaleTotal());
+        assertEquals(BOB_CREDIT_CARD.creditcardNumber(), actual.getCreditcardNumber());
+        assertEquals(50, actual.getFee());
+
         emailSender.verify();
     }
 }

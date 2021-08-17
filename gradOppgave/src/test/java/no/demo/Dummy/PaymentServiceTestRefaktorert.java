@@ -19,6 +19,7 @@ class PaymentServiceTestRefaktorert {
     private LoggerDummy loggerDummy;
     public static final Customer BOB = new Customer("Bob");
     public static final Item IPHONE = new Item("iPhone X", 1000);
+    public static final Item IPHONE_LADER = new Item("iPhone lader", 500);
     public static final CreditCard BOB_CREDIT_CARD = new CreditCard(BOB, "1");
 
     @BeforeEach
@@ -30,9 +31,11 @@ class PaymentServiceTestRefaktorert {
 
     @Test
     void create_payment_request() {
-        Sale sale = new Sale(BOB, List.of(IPHONE));
+        var sale = new Sale(BOB, List.of(IPHONE, IPHONE_LADER));
 
-        PaymentRequest actual = paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);
-        assertEquals(new PaymentRequest(1000, "1"), actual);
+        var actual = paymentService.createPaymentRequest(sale, BOB_CREDIT_CARD);
+
+        assertEquals(1500, actual.getSaleTotal());
+        assertEquals("1", actual.getCreditcardNumber());
     }
 }
