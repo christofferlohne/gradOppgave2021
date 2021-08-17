@@ -31,8 +31,8 @@ class Oppgave1Fasit {
 
     @Test
     public void burdeFåInnvilgetVilkår() throws IOException {
-        var vilkårStatus = underTest.oppfyltVilkår(new Fødselsnummer("12312312312"), LocalDate.now());
-        assertEquals(VilkårStatus.INNVILGET, vilkårStatus);
+        var inngangsvilkårResultat = underTest.oppfyltVilkår(new Fødselsnummer("12312312312"), LocalDate.now());
+        assertEquals(VilkårStatus.INNVILGET, inngangsvilkårResultat);
     }
 
 }
