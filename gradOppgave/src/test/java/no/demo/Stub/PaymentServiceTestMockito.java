@@ -1,8 +1,8 @@
 package no.demo.Stub;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ class PaymentServiceTestMockito {
 
         // operatorRate = new OperatorRateStub(10);
         operatorRate = mock(OperatorRate.class);
-        given(operatorRate.feeRate(BOB_CREDIT_CARD.creditcardNumber())).willReturn(10);
+        when(operatorRate.feeRate(BOB_CREDIT_CARD.creditcardNumber())).thenReturn(10);
 
         paymentService = new PaymentService(logger, operatorRate);
     }
