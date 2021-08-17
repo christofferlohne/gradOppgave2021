@@ -26,7 +26,8 @@ class BetalingstjenesteTest {
         Salg sale = new Salg(kunde , items);
         Bankkort bankkort = new Bankkort(kunde , "1");
 
-        Betalingstjeneste betalingstjeneste = new Betalingstjeneste(null);
+        //Betalingstjeneste betalingstjeneste = new Betalingstjeneste(null);
+        Betalingstjeneste betalingstjeneste = new Betalingstjeneste(loggerDummy);
         Betalingsforespørsel betalingsforespørsel = betalingstjeneste.lagBetalingsforespørsel(sale, bankkort);
 
         assertEquals(1500, betalingsforespørsel.beløp());
