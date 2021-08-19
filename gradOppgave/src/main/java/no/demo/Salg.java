@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Salg {
 
-    private Kunde customer;
+    private Kunde kunde;
     private List<Vare> items;
 
-    public Salg(Kunde customer, List<Vare> items) {
-        this.customer = customer;
+    public Salg(Kunde kunde, List<Vare> items) {
+        this.kunde = kunde;
         this.items = items;
     }
 

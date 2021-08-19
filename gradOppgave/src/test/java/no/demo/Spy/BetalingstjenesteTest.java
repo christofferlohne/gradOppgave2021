@@ -22,7 +22,7 @@ class BetalingstjenesteTest {
     private OperatorRate operatorRate;
     private Betalingstjeneste betalingstjeneste;
     private LoggerDummy loggerDummy;
-    public static final Kunde BOB = new Kunde("Bob");
+    public static final Kunde BOB = new Kunde("BOBBY", "BOB");
     public static final Vare IPHONE = new Vare("iPhone X", 1000);
     public static final Vare IPHONE_LADER = new Vare("iPhone lader", 500);
     public static final Bankkort BOB_KREDITTKORT = new Bankkort(BOB, "1");

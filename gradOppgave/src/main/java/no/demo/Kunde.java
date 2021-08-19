@@ -2,13 +2,19 @@ package no.demo;
 
 public class Kunde {
 
-    private String navn;
+    private String fornavn;
+    private String etternavn;
 
-    public Kunde(String navn) {
-        this.navn = navn;
+    public Kunde(String fornavn, String etternavn) {
+        this.fornavn = fornavn;
+        this.etternavn = etternavn;
     }
 
-    public String getNavn() {
-        return navn;
+    public String getFornavn() {
+        return fornavn;
+    }
+
+    public String getEtternavn() {
+        return etternavn;
     }
 }

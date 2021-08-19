@@ -19,7 +19,7 @@ class BetalingstjenesteTest {
     void verifiser_korrekt_sum_av_salg_ved_flere_varer() {
         var loggerDummy = new LoggerDummy();
 
-        var kunde = new Kunde("name");
+        var kunde = new Kunde("Ola", "Nordman");
         var vare1 = new Vare("IPHONE", 1000);
         var vare2 = new Vare("Lader", 500);
         List<Vare> items= asList(vare1, vare2);
