@@ -13,7 +13,7 @@ import no.demo.Salg;
 import no.demo.Vare;
 
 
-class BetalingstjenesteTest {
+class BetalingstjenesteTestOK {
 
     @Test
     void verifiser_korrekt_sum_av_salg_ved_flere_varer() {
